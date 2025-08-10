@@ -1,0 +1,20 @@
+  
+{
+  "description": "A series of cool charcoal portraits capturing quiet emotions and subtle expressions.",
+  "NY, new york":
+
+  [
+    {
+      "title": "City Bards",
+      "status": "Sold - $600",
+      "details": "18×24 in · Charcoal on paper",
+      "filenames": ["city_bards.jpeg","city_bards_1.jpeg","city_bards_2.jpeg"]
+    },
+    {
+      "title": "Hot Dogs on Columbus",
+      "status": "Avaliable - $500",
+      "details": "18×24 in · Charcoal on paper",
+      "filenames": ["hot_dogs_columbus.jpeg","hot_dogs_columbus_1.jpeg","hot_dogs_columbus_2.jpeg"]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "description": "All listed artworks.",
-  "artworks": 
+  "all litsted artworks": 
   [
      {
       "title": "Portrait for a Friend",
@@ -16,7 +16,7 @@
     },
         {
       "title": "Easter's Eve",
-      "status": "Sold - $900",
+      "status": "Available - $900",
       "details": "18×24 in · Charcoal on paper",
       "filenames": ["easters_eve.jpeg","easters_eve_1.jpeg","easters_eve_2.jpeg"]
     }

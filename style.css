@@ -3,22 +3,34 @@
 :root{
   /* Pick your pairing here: A or B */
   /* Pairing A (more gothic): */
-  --font-display: 'Cinzel', serif;
-  --font-body: 'Sora', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-display: 'Cinzel Decorative', serif;
+  --font-body: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
 
 /* ===== Base ===== */
+/* ===== Typography ===== */
 body{
   background:#111;
   color:#eee;
-  font-family: var(--font-body);
-  font-weight: 300;
-  font-size:1.1rem;  /* small nudge more compact for Inter/Manrope */
+  font-family: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-weight: 300;           /* thinner default for body */
+  font-size: 1.1rem;          /* Montserrat reads a bit larger */
+  line-height: 1.6;
   margin:0;
-  line-height:1.6;
 }
 
-/* Wordmark (your name) gets the display font */
+/* Titles/branding */
+body h1, body h2, body h3, .hero-text h1, .form-title{
+  font-family: 'Cinzel Decorative', serif;
+  letter-spacing: .02em;
+  font-weight: 700;
+}
+
+/* Make captions/details readable in body font */
+.caption, .details, .collection-description, nav a, label, input, textarea, p {
+  font-family: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
 .hero-text{
   position:relative; z-index:2;
   text-align:center; color:#fff;
@@ -28,47 +40,43 @@ body{
 
 .hero-text h1{
   margin:0;
-  font-size: clamp(2.4rem, 6.2vw, 5.5rem);  /* bigger top end */
-  line-height: 1.05;
+  font-size: clamp(2.6rem, 6.6vw, 5.8rem);  /* bigger peak */
+  line-height: 1.04;
+  font-weight: 700;
 }
 
-.hero-text p{
-  margin:.25rem 0 0;
-  font-size: clamp(0.9rem, 1.8vw, 1.25rem); /* smaller than before */
-  opacity: .9;
-  letter-spacing: .03em;
+/* Tagline container */
+.hero-text .tagline{
+  margin:.35rem 0 0;
+  display:flex;
+  flex-direction:column;      /* stack lines */
+  gap:.15rem;
 }
 
-/* You can remove the old mobile override for h1/p or keep it minimal */
+/* First line (the vibe) */
+.tagline-primary{
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 400;
+  font-size: clamp(1.0rem, 2.1vw, 1.35rem);
+  letter-spacing:.04em;
+  text-transform:none;
+  opacity:.95;
+}
+
+/* Second line (your role) */
+.tagline-secondary{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: clamp(0.9rem, 1.7vw, 1.15rem);
+  letter-spacing:.03em;
+  opacity:.9;
+}
+
 @media (max-width: 600px) {
   .hero-header { aspect-ratio: 5 / 3; }
   .hero-text   { padding: 0.75rem 1rem; }
 }
 
-
-/* Section headings use display; subhead/body use body */
-body h1, body h2, body h3, .form-title{
-  font-family: var(--font-display);
-}
-
-.collection-description, .caption, .details, p, label, input, textarea, nav a{
-  font-family: var(--font-body);
-}
-
-/* Optional: make nav feel sharper with small caps effect */
-nav a{
-  letter-spacing:.03em;
-  text-transform: none; /* or uppercase if you prefer */
-  font-weight:700;
-}
-
-nav ul{
-  margin:0; padding:0;
-  list-style:none;
-  display:flex; gap:2rem;
-}
-nav a{ color:#eee; text-decoration:none; font-weight:700; font-size:1rem; }
-@media (min-width:768px){ nav a{ font-size:1.5rem; } }
 
 /* ===== Hero banner (reverted to your aspect ratio) ===== */
 .hero-header{
@@ -391,6 +399,66 @@ body h3{ font-size:1.5rem; }
     #clear-board:hover {
       background: #666;
     }
+
+    /* ===== Sketchpad layout ===== */
+  #whiteboard-section{
+    margin: 2rem auto;
+    max-width: 1200px;
+    text-align: center;
+    padding: 0 1rem;
+  }
+
+  .sketchpad-title{
+    margin: 0 0 .5rem 0;
+    text-align: center;
+  }
+
+  .sketchpad-description{
+    margin: 0 auto 1rem auto;
+    max-width: 60ch;
+    opacity: .9;
+    line-height: 1.5;
+  }
+
+  /* wrapper ensures the canvas centers and scales */
+  .sketchpad-wrap{
+    position: relative;
+    margin: 0 auto;
+    width: min(100%, 1100px);
+    background: #111;
+    border: 2px solid #444;
+  }
+
+  /* Canvas fills the wrapper; exact pixel size is set via JS for crispness */
+  #whiteboard{
+    display: block;
+    width: 100%;
+    height: auto;     /* height is controlled by JS using an aspect/viewport calc */
+    touch-action: none;
+    cursor: crosshair;
+  }
+
+  /* Buttons row */
+  .sketchpad-actions{
+    display: flex;
+    gap: .5rem;
+    justify-content: center;
+    align-items: center;
+    margin-top: .75rem;
+  }
+
+  .btn{
+    padding: 0.5rem 1rem;
+    background: #444;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font: inherit;
+    cursor: pointer;
+  }
+  .btn:hover{ background:#666; }
+  .btn-accent{ background:#555; }
+  .btn-accent:hover{ background:#777; }
 
     /* Section title alignment alternates left/right */
 section h2{

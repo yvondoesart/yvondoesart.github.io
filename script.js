@@ -243,53 +243,118 @@
 
     /* Int whiteboard for fun*/
 
+  /* Interactive whiteboard — responsive + export */
   (function() {
     const canvas = document.getElementById('whiteboard');
     const ctx    = canvas.getContext('2d');
     let drawing = false;
     let lastX = 0, lastY = 0;
 
-    // set up a smooth line style
+    // stroke style
     ctx.strokeStyle = '#eee';
     ctx.lineWidth   = 2;
     ctx.lineJoin    = 'round';
     ctx.lineCap     = 'round';
 
+    // Resize canvas to fill leftover space responsively (and keep it sharp on retina)
+    function resizeCanvas() {
+      const wrap = canvas.parentElement; // .sketchpad-wrap
+      const dpr = window.devicePixelRatio || 1;
+
+      // Desired display size
+      const displayWidth  = wrap.clientWidth;
+      const displayHeight = Math.max(300, Math.min(window.innerHeight * 0.6, 700)); // fills vertical space nicely
+
+      // Set the canvas's internal pixel buffer
+      canvas.width  = Math.floor(displayWidth * dpr);
+      canvas.height = Math.floor(displayHeight * dpr);
+
+      // And its CSS display size (what the user sees)
+      canvas.style.width  = displayWidth + 'px';
+      canvas.style.height = displayHeight + 'px';
+
+      // Scale the 2D context so 1 unit = 1 CSS pixel
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function getPos(e) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return { x: clientX - rect.left, y: clientY - rect.top };
+    }
+
     function pointerDown(e) {
       drawing = true;
-      const rect = canvas.getBoundingClientRect();
-      lastX = (e.clientX || e.touches[0].clientX) - rect.left;
-      lastY = (e.clientY || e.touches[0].clientY) - rect.top;
+      const p = getPos(e);
+      lastX = p.x; lastY = p.y;
     }
 
     function pointerMove(e) {
       if (!drawing) return;
-      const rect = canvas.getBoundingClientRect();
-      const x = (e.clientX || e.touches[0].clientX) - rect.left;
-      const y = (e.clientY || e.touches[0].clientY) - rect.top;
+      const p = getPos(e);
       ctx.beginPath();
       ctx.moveTo(lastX, lastY);
-      ctx.lineTo(x, y);
+      ctx.lineTo(p.x, p.y);
       ctx.stroke();
-      lastX = x; lastY = y;
-      e.preventDefault();
+      lastX = p.x; lastY = p.y;
+      if (e.cancelable) e.preventDefault();
     }
 
     function pointerUp() {
       drawing = false;
     }
 
-    // mouse
+    // Events
+    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('orientationchange', resizeCanvas);
     canvas.addEventListener('mousedown', pointerDown);
     canvas.addEventListener('mousemove', pointerMove);
     window .addEventListener('mouseup',   pointerUp);
-    // touch
-    canvas.addEventListener('touchstart', pointerDown);
-    canvas.addEventListener('touchmove',  pointerMove);
-    window .addEventListener('touchend',   pointerUp);
 
-    // clear button
+    canvas.addEventListener('touchstart', pointerDown, { passive:false });
+    canvas.addEventListener('touchmove',  pointerMove, { passive:false });
+    window .addEventListener('touchend',  pointerUp);
+
+    // Clear
     document.getElementById('clear-board').addEventListener('click', () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
     });
+
+    // Download PNG
+    document.getElementById('download-board').addEventListener('click', () => {
+      canvas.toBlob(blob => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'yvon-sketchpad.png';
+        a.click();
+        URL.revokeObjectURL(url);
+      });
+    });
+
+    // “Send to Yvon” — downloads PNG and opens email draft
+    document.getElementById('send-board').addEventListener('click', () => {
+      // 1) Download a copy so they can attach
+      canvas.toBlob(blob => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'yvon-sketchpad.png';
+        a.click();
+        URL.revokeObjectURL(url);
+
+        // 2) Open mail client (attachments can’t be auto‑added by websites for security)
+        const subject = encodeURIComponent('Sketchpad submission');
+        const body = encodeURIComponent(
+          `Hi Yvon,%0D%0A%0D%0AI drew this in your sketchpad. See attached PNG (downloaded just now).` +
+          `%0D%0A%0D%0AOptional notes:%0D%0A- Title:%0D%0A- Thoughts/feelings while drawing:%0D%0A%0D%0A—`
+        );
+        window.location.href = `mailto:yvondoesart@gmail.com?subject=${subject}&body=${body}`;
+      });
+    });
+
+    // Initial size
+    resizeCanvas();
   })();
+

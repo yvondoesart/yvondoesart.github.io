@@ -11,7 +11,7 @@
 
   <!-- Link for fonts -->
    <!-- Free font pairs for display + body -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;600;700&family=Sora:wght@500;700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <nav>s
@@ -52,9 +52,12 @@
     <img src="images/skull-cover.jpeg" alt="Header background" class="hero-bg" />
     <div class="hero-text">
       <h1>Yvon Lu</h1>
-      <p> Purveyor of the darkness</p>
-      <p>Charcoal and ink artist</p>
+      <p class="tagline">
+        <span class="tagline-primary">Curator of Ashes</span>
+        <span class="tagline-secondary">Charcoal &amp;  Ink Artist</span>
+      </p>
     </div>
+
   </header>
 
    <!-- Gallery on one-pager -->
@@ -160,10 +163,24 @@
 
   <!-- Interactive Whiteboard. For fun. Delete if not wanted -->
   <section id="whiteboard-section" class="right-padded reveal">
-    <h2>Sketchpad</h2>
-    <canvas id="whiteboard" width="800" height="400" style="border:2px solid #444; touch-action: none;"></canvas>
-    <button id="clear-board">Clear</button>
+    <h2 class="sketchpad-title">On your Own</h2>
+    <p class="sketchpad-description">
+      Art is a two way street. I draw and you view and perhaps, you draw and I view.
+      Here is place for this to happen. Scribe what you feel and how you react.
+      Send it to me, or keep it for yourself. Participate.
+    </p>
+  
+    <div class="sketchpad-wrap">
+      <canvas id="whiteboard"></canvas>
+    </div>
+  
+    <div class="sketchpad-actions">
+      <button id="clear-board" class="btn">Clear</button>
+      <button id="download-board" class="btn">Download PNG</button>
+      <button id="send-board" class="btn btn-accent">Send to Yvon</button>
+    </div>
   </section>
+  
   <script src="script.js"></script>
 </body>
 </html>

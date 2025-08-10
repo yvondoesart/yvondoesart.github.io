@@ -1,0 +1,24 @@
+{
+  "description": "All listed artworks.",
+  "artworks": 
+  [
+     {
+      "title": "Portrait for a Friend",
+      "status": "Sold - $600",
+      "details": "18×24 in · Charcoal on paper",
+      "filenames": ["portrait_of_friend.jpeg","portrait_of_friend_1.jpeg","portrait_of_friend_2.jpeg","portrait_of_friend_3.jpeg","portrait_of_friend_4.jpeg"]
+    },
+    {
+      "title": "Memento Mori",
+      "status": "Avaliable - $400",
+      "details": "11×14 in · Charcoal on paper",
+      "filenames": ["memento_mori.jpeg","memento_mori_1.jpeg","memento_mori_2.jpeg"]
+    },
+        {
+      "title": "Easter's Eve",
+      "status": "Sold - $900",
+      "details": "18×24 in · Charcoal on paper",
+      "filenames": ["easters_eve.jpeg","easters_eve_1.jpeg","easters_eve_2.jpeg"]
+    }
+  ]
+}

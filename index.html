@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Art Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+   <!-- Icon -->
+  <link rel="icon" type="image/png" href="images/temp_icon.png" />
+  <link rel="apple-touch-icon" href="images/temp_icon.png">
+
+  <!-- Link for fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav>
+    <ul>
+      <a href="#about">About</a>
+
+      <!-- Sekelleton for second page on nav bar
+      <li><a href="gallery.html">Gallery</a></li>-->
+
+      <a href="#gallery">Gallery</a>
+
+      <a href="#comissions">Comissions</a>
+
+      <a href="#prints">Prints</a>
+
+      <a href="#contact">Contact</a>
+
+      
+
+      <!-- Placeholder for Yvon to see if she likes dropd}
+      <li class="dropdown">
+
+         
+        <a href="#">Collections ▾</a> 
+        <ul class="dropdown-content">
+          <li><a href="#">Sketches</a></li>
+          <li><a href="#">Portraits</a></li>
+          <li><a href="#">Landscapes</a></li>
+        </ul>
+      </li> -->
+    </ul>
+  </nav>
+
+
+  <!-- Banner with Name and Image -->
+  <header class="hero-header">
+    
+    <img src="images/skull-cover.jpeg" alt="Header background" class="hero-bg" />
+    <div class="hero-text">
+      <h1>Yvon Lu</h1>
+      <p>Charcoal & Graphite Artist</p>
+    </div>
+  </header>
+
+   <!-- Gallery on one-pager -->
+  <section id="gallery" class="collections-section reveal">
+
+    <!-- List of Collections. Added via JSON -->
+    <h2>Collections</h2>
+    <div class="collections-bar" id="collections-bar">
+      <div class="collection-tab active" data-collection="charcoal">Charcoal</div>
+      <div class="collection-tab active" data-collection="portraits">Portraits</div>
+      <div class="collection-tab" data-collection="sketches">Sketches</div>
+      <div class="collection-tab" data-collection="artworks">Artworks</div>
+    </div>
+    <p class="collection-description" id="collection-description"></p>
+
+    <!-- Move the image grid inside this same section -->
+    <div class="gallery" id="gallery-images"></div>
+  </section>
+
+  <!-- Image Zoom-In -->
+  <div id="modal" onclick="closeModal(event)">
+    <div id="modal-content">
+      <!-- close button (already had onclick) -->
+      <button id="modal-close" onclick="closeModal(event)">×</button>
+
+      <div class="modal-image-wrapper">
+        <!-- prev arrow, now wired up -->
+        <button id="modal-prev" class="modal-nav" onclick="modalPrev()">‹</button>
+        <!-- the image -->
+        <img id="modal-img" src="" alt="Zoomed Art" />
+        <!-- next arrow, now wired up -->
+        <button id="modal-next" class="modal-nav" onclick="modalNext()">›</button>
+
+        <!-- overlay title + status -->
+        <div class="modal-overlay-text">
+          <div id="modal-art-title"></div>
+          <div id="modal-art-status"></div>
+        </div>
+
+        <!-- your “size · material” caption -->
+        <div id="modal-art-details" class="modal-details"></div>
+      </div>
+
+      <div class="modal-form-container">
+        <h3 class="form-title">Inquire About This Piece</h3>
+        <form 
+          id="inquiry-form" 
+          action="https://formsubmit.co/icaroabacelar@gmail.com" 
+          method="POST" 
+          target="hidden_iframe"
+          onsubmit="handleSubmit(event)"
+        >
+          <input type="hidden" name="artTitle" id="form-art-title" />
+          <label>Your Name: <input type="text" name="name" required /></label>
+          <label>Your Email: <input type="email" name="email" required /></label>
+          <label>Message: <textarea name="message" rows="4" required></textarea></label>
+          <input type="hidden" name="_captcha" value="false" />
+          <button type="submit">Send Inquiry</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- For the i-frame. Avoid redirection -->
+  <iframe name="hidden_iframe" style="display:none;"></iframe>
+  <!-- For the toast -->
+  <div id="toast" class="toast">Thank you! Your inquiry has been received.</div>
+
+  <!-- Previous Interation: Images on HTML instead of JSON. Delete if don't want
+  <section class="gallery">
+    <div class="art-piece" onclick="openModal(this)">
+      <img src="images/art1.jpg" alt="Art 1" />
+      <p class="caption">"Stillness" — Sold</p>
+    </div>
+    <div class="art-piece" onclick="openModal(this)">
+      <img src="images/art2.jpg" alt="Art 2" />
+      <p class="caption">"Morning Light" — Available</p>
+    </div>
+  </section> -->
+
+  <section id="about" class="right-padded reveal">
+    <h2>About</h2>
+    <p>Welcome to Yvon's world of charcoal and graphite. This section will include a full bio, artistic influences, and creative process.</p>
+  </section>
+
+  <section id="comissions" class="right-padded reveal">
+    <h2>Comissions</h2>
+    <p>Welcome to Yvon's world of charcoal and graphite. This section will include a full bio, artistic influences, and creative process.</p>
+  </section>
+
+  <section id="prints" class="right-padded reveal">
+    <h2>Prints</h2>
+    <p>Welcome to Yvon's world of charcoal and graphite. This section will include a full bio, artistic influences, and creative process.</p>
+  </section>
+
+  <section id="contact" class="right-padded reveal">
+    <h2>Contact</h2>
+    <p>You can reach out via email for inquiries, commissions, or collaborations. Stay tuned! Socials:</p>
+    <a href="mailto:your.email@example.com">your.email@example.com</a>
+  </section>
+
+  <!-- Interactive Whiteboard. For fun. Delete if not wanted -->
+  <section id="whiteboard-section" class="right-padded reveal">
+    <h2>Sketchpad</h2>
+    <canvas id="whiteboard" width="800" height="400" style="border:2px solid #444; touch-action: none;"></canvas>
+    <button id="clear-board">Clear</button>
+  </section>
+  <script src="script.js"></script>
+</body>
+</html>
+

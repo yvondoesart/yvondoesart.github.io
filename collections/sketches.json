@@ -1,0 +1,18 @@
+
+
+{
+  "description": "Those are just Yvon being silly.",
+  "artworks":
+  [
+    {
+      "title": "Stillness",
+      "status": "Sold",
+      "filename": "art1.jpg"
+    },
+    {
+      "title": "Morning Light",
+      "status": "Available",
+      "filename": "art2.jpg"
+    }
+]
+}

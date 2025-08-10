@@ -1,0 +1,18 @@
+{
+  "description": "A series of cool charcoal portraits capturing quiet emotions and subtle expressions.",
+  "artworks": 
+  [
+    {
+      "title": "Stillness",
+      "status": "Sold",
+      "details":  "11×14 in · Charcoal on paper",
+      "filenames": ["art1.jpg","alt3.jpg","art2.jpg"]
+    },
+    {
+      "title": "Histogram",
+      "status": "Available",
+      "details": "11×14 in · Charcoal on paper",
+      "filenames": ["art3.jpg","art2.jpg"]
+    }
+  ]
+}

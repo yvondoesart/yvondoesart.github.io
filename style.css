@@ -3,13 +3,8 @@
 :root{
   /* Pick your pairing here: A or B */
   /* Pairing A (more gothic): */
-  --font-display: 'UnifrakturCook', system-ui, sans-serif;
-  --font-body: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-
-  /* Pairing B (sleek/classic):
   --font-display: 'Cinzel', serif;
-  --font-body: 'Manrope', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  */
+  --font-body: 'Sora', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
 
 /* ===== Base ===== */
@@ -17,18 +12,39 @@ body{
   background:#111;
   color:#eee;
   font-family: var(--font-body);
+  font-weight: 300;
   font-size:1.1rem;  /* small nudge more compact for Inter/Manrope */
   margin:0;
   line-height:1.6;
 }
 
 /* Wordmark (your name) gets the display font */
+.hero-text{
+  position:relative; z-index:2;
+  text-align:center; color:#fff;
+  padding:2rem 1rem;
+  background:rgba(0,0,0,.4);
+}
+
 .hero-text h1{
   margin:0;
-  font-size:4.5rem;
-  font-family: var(--font-display);
-  letter-spacing:.5px;
+  font-size: clamp(2.4rem, 6.2vw, 5.5rem);  /* bigger top end */
+  line-height: 1.05;
 }
+
+.hero-text p{
+  margin:.25rem 0 0;
+  font-size: clamp(0.9rem, 1.8vw, 1.25rem); /* smaller than before */
+  opacity: .9;
+  letter-spacing: .03em;
+}
+
+/* You can remove the old mobile override for h1/p or keep it minimal */
+@media (max-width: 600px) {
+  .hero-header { aspect-ratio: 5 / 3; }
+  .hero-text   { padding: 0.75rem 1rem; }
+}
+
 
 /* Section headings use display; subhead/body use body */
 body h1, body h2, body h3, .form-title{
@@ -375,3 +391,17 @@ body h3{ font-size:1.5rem; }
     #clear-board:hover {
       background: #666;
     }
+
+    /* Section title alignment alternates left/right */
+section h2{
+  margin: 0;
+  padding: 1.25rem 1.5rem;
+}
+
+section:nth-of-type(odd) h2  { text-align: left;  }
+section:nth-of-type(even) h2 { text-align: right; }
+
+/* On small screens, keep headings left for readability */
+@media (max-width: 640px){
+  section h2 { text-align: left !important; }
+}

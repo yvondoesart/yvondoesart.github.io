@@ -14,7 +14,7 @@
    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <nav>s
+  <nav>
     <ul>
       <a href="#about">About</a>
 
@@ -31,7 +31,7 @@
 
       
 
-      <!-- Placeholder for Yvon to see if she likes dropd}
+      <!-- Placeholder for Yvon to see if she likedropd}
       <li class="dropdown">
 
          
@@ -140,34 +140,96 @@
     </div>
   </section> -->
 
-  <section id="about" class="right-padded reveal">
+  <section id="about" class="reveal">
     <h2>About</h2>
     <p>
     Greetings and salutations! My name is Yvon Lu, and I am a young Vietnamese American artist located in NYC, NY. I’ve been drawing since childhood, but I fell in love with charcoal during a class called New York City as the Muse.
     The medium was addictive, fun, and encouraged me to push the boundaries of the monochrome. I love pushing values to the extremes and relying on contrast to tell a complete story. My work also often invokes charcoal textures to communicate themes and motifs.
     I am primarily interested in exploring the uncanny, the unsettling, and the candid, moments that don’t demand attention yet linger in the mind.
-    Through the subjects of urban life, biology, and animalia, I utilize charcoal, ink, and other mediums to inspire viewers to feel and react. 
+    </p>
+    <p>
+    Influenced by Gothic literature, speculative anatomy, and classic horror—from Lovecraft to black-and-white monster films like Dracula and Frankenstein—I aim to draw viewers into a world that is familiar yet disquieting. In each piece, 
+    I want the textures of the medium itself to be felt: the grit, the smudge, the sudden hard edge. 
+    Above all, I hope my work leaves a lingering unease, as if you’ve stumbled across something you weren’t meant to see.
     </p>
   </section>
 
   <section id="comissions" class="right-padded reveal">
-    <h2>Comissions</h2>
-    <p>Thank you for considering purchasing a commission from me.</p>
+  <form id="commission-form" class="commission-form" action="https://formspree.io/f/your-id-here" method="POST">
+    <h3>Commission Request</h3>
+
+    <div class="row">
+      <label>Full name
+        <input name="name" required>
+      </label>
+      <label>Email
+        <input name="email" type="email" required>
+      </label>
+    </div>
+
+    <div class="row">
+      <label>Artwork type
+        <select name="type" required>
+          <option value="">Select…</option>
+          <option>Portrait</option>
+          <option>Single subject</option>
+          <option>Scene</option>
+          <option>Other</option>
+        </select>
+      </label>
+      <label>Size (inches)
+        <input name="size" placeholder="e.g., 11x14">
+      </label>
+    </div>
+
+    <div class="row">
+      <label>Budget (USD)
+        <input name="budget" type="number" min="0" step="1" placeholder="Optional">
+      </label>
+      <label>Deadline
+        <input name="need by deadline" type="date">
+      </label>
+    </div>
+
+    <label>Brief description
+      <textarea name="description" rows="5" placeholder="What are you envisioning?"></textarea>
+    </label>
+
+    <label>Reference image (URL)
+      <input name="reference_url" type="url" placeholder="Optional link">
+    </label>
+
+    <button type="submit">Send Request</button>
+  </form>
+
+  <!-- guidelines & rules under commissions -->
+  <section class="commission-guidelines">
+    <h4>Guidelines &amp; Rules</h4>
+    <ul>
+      <li>Currently only charcoal &amp; graphite.</li>
+      <li>Please provide clear references when possible.</li>
+      <li>Minor revisions included before final fixative.</li>
+      <li>50% non-refundable deposit to start; remainder on approval.</li>
+      <li>Typical turnaround: 2–4 weeks depending on size &amp; complexity.
+      <li> Thank you so much for supporting my art and considering a commission from me!</li>
+      </li>
+    </ul>
+
   </section>
 
   <section id="prints" class="right-padded reveal">
     <h2>Prints</h2>
-    <p>Welcome to Yvon's world of charcoal and graphite. This section will include a full bio, artistic influences, and creative process.</p>
+    <p>Coming soon...</p>
   </section>
 
   <section id="contact" class="right-padded reveal">
     <h2>Contact</h2>
-    <p>For inquiries please reach out to me at 
+    <p>For inquiries, collaborations, or other chats please reach out to me at 
     <a href="mailto:yvondoesart@gmail.com">yvondoesart@gmail.com</a>
   </section>
 
   <!-- Interactive Whiteboard. For fun. Delete if not wanted -->
-  <section id="whiteboard-section" class="right-padded reveal">
+  <section id="whiteboard-section" class="reveal">
     <h2 class="sketchpad-title">On your Own</h2>
     <p class="sketchpad-description">
       Art is a two way street. I draw and you view and perhaps, you draw and I view.

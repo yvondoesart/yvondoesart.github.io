@@ -232,7 +232,7 @@
     }
 
 
-    loadCollection('portraits');
+    loadCollection('all-that-remains');
 
     document.addEventListener('DOMContentLoaded', () => {
       const modal = document.getElementById('modal');
@@ -240,6 +240,56 @@
       if (location.hash === '#modal') history.replaceState(null, '', location.pathname); // clear stray hash
     });
 
+    /* basic scratchpad drawing (safe no-op if canvas not found) */
+  (function () {
+    const c = document.getElementById('scratchpad') || document.querySelector('canvas.scratchpad');
+    if (!c || c.dataset.drawingReady) return;
+    const ctx = c.getContext('2d', { willReadFrequently: true });
+    c.dataset.drawingReady = '1';
+
+    function fit() {
+      const dpr = window.devicePixelRatio || 1;
+      const rect = c.getBoundingClientRect();
+      // preserve CSS size; scale backing store
+      c.width = Math.max(1, Math.round(rect.width * dpr));
+      c.height = Math.max(1, Math.round(rect.height * dpr));
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
+    }
+    fit(); window.addEventListener('resize', fit);
+
+    let drawing = false, prev = null;
+    const pen = { size: 2, color: '#111' };
+
+    function relPos(e) {
+      const r = c.getBoundingClientRect();
+      if (e.touches && e.touches[0]) return { x: e.touches[0].clientX - r.left, y: e.touches[0].clientY - r.top };
+      return { x: e.clientX - r.left, y: e.clientY - r.top };
+    }
+
+    function start(e) { drawing = true; prev = relPos(e); e.preventDefault(); }
+    function move(e) {
+      if (!drawing) return;
+      const p = relPos(e);
+      ctx.lineWidth = pen.size;
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = pen.color;
+      ctx.beginPath();
+      ctx.moveTo(prev.x, prev.y);
+      ctx.lineTo(p.x, p.y);
+      ctx.stroke();
+      prev = p;
+      e.preventDefault();
+    }
+    function end() { drawing = false; prev = null; }
+
+    c.addEventListener('mousedown', start);
+    c.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', end);
+    c.addEventListener('touchstart', start, { passive: false });
+    c.addEventListener('touchmove', move, { passive: false });
+    window.addEventListener('touchend', end);
+  })();
 
     /* Int whiteboard for fun*/
 
@@ -347,8 +397,8 @@
         // 2) Open mail client (attachments can’t be auto‑added by websites for security)
         const subject = encodeURIComponent('Sketchpad submission');
         const body = encodeURIComponent(
-          `Hi Yvon,%0D%0A%0D%0AI drew this in your sketchpad. See attached PNG (downloaded just now).` +
-          `%0D%0A%0D%0AOptional notes:%0D%0A- Title:%0D%0A- Thoughts/feelings while drawing:%0D%0A%0D%0A—`
+          `Hi Yvon, I drew this in your sketchpad. See attached PNG (downloaded just now).` +
+          `Now, send me some thoughts on your art or mine...let's start a conversation`
         );
         window.location.href = `mailto:yvondoesart@gmail.com?subject=${subject}&body=${body}`;
       });

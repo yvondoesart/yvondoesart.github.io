@@ -19,6 +19,29 @@ body{
   margin:0;
 }
 
+/* ===== Nav ===== */
+nav{
+  background:#000;
+  padding:1rem;
+  display:flex;
+  justify-content:center;
+}
+nav ul{
+  margin:0; padding:0;
+  list-style:none;
+  display:flex; gap:2rem;
+}
+nav a {
+  color:#eee;
+  text-decoration:none;
+  font-weight:300;
+  font-size:1rem;
+  font-family: 'Montserrat', sans-serif;   /* add this line */
+}
+@media (min-width:768px){
+  nav a { font-size:1.5rem; }
+}
+
 /* Titles/branding */
 body h1, body h2, body h3, .hero-text h1, .form-title{
   font-family: 'Cinzel Decorative', serif;
@@ -397,12 +420,14 @@ body h3{ font-size:1.5rem; }
     #whiteboard-section {
       margin: 2rem 0;
     }
+    /* White scratchpad, same sizing/behavior */
     #whiteboard {
       display: block;
       max-width: 100%;
-      background: #111;
+      background: #fff;          /* <- was #111 */
       cursor: crosshair;
     }
+
     #clear-board {
       margin-top: 0.5rem;
       padding: 0.5rem 1rem;
@@ -441,7 +466,7 @@ body h3{ font-size:1.5rem; }
       position: relative;
       margin: 0 auto;
       width: min(100%, 1100px);
-      background: #111;
+      background: #dddd;
       border: 2px solid #444;
     }
 
@@ -500,3 +525,52 @@ section:nth-of-type(even) h2 { text-align: right; }
   justify-content: center;
   text-align: center;
 }
+
+/* make header links look like white text */
+.site-header a, .nav a, header nav a {
+  color: #fff !important;
+  text-decoration: none !important;
+}
+.site-header a:visited, .nav a:visited, header nav a:visited { color: #fff !important; }
+.site-header a:hover, .nav a:hover, header nav a:hover { opacity: .85; text-decoration: none; }
+
+/* scratchpad usability */
+#scratchpad, canvas.scratchpad {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  touch-action: none;     /* enable touch drawing */
+  cursor: crosshair;
+}
+
+/* simple form layout for commissions */
+.commission-form, .commission-guidelines { margin-top: 1.5rem; }
+.commission-form .row { display: flex; gap: 1rem; flex-wrap: wrap; }
+.commission-form label { display: flex; flex-direction: column; gap: .25rem; flex: 1 1 240px; }
+.commission-form input,
+.commission-form select,
+.commission-form textarea {
+  padding: .5rem .6rem;
+  border: 1px solid #ddd;
+  background: #111;   /* keep site look; change if your page is light */
+  color: #fff;
+}
+.commission-form button {
+  padding: .6rem 1rem;
+  border: 0;
+  background: #fff;
+  color: #111;
+}
+/* Make header/nav links white and not underlined */
+nav a,
+nav a:link,
+nav a:visited {
+  color: #fff !important;
+  text-decoration: none !important;
+}
+nav a:hover,
+nav a:focus {
+  color: #fff !important;
+  text-decoration: none !important;
+  opacity: .85;
+}
+

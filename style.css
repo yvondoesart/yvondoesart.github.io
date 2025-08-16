@@ -360,6 +360,21 @@ body h3{ font-size:1.5rem; }
 /* ===== Minor utilities ===== */
 .right-padded{ padding-left:1.5rem; }
 
+/* Keep section copy aligned with its H2 */
+#about, #commissions, #prints, #contact {
+  padding-left: 1.5rem;         /* same indent as your titles */
+}
+
+#about h2, #about p,
+#commissions h2, #commissions p,
+#prints h2, #prints p,
+#contact h2, #contact p {
+  text-align: left;              /* both title and text on same side */
+  margin-left: 0;
+  max-width: 65ch;               /* nicer reading width */
+}
+
+
 /* ===== Banner animation (unchanged) ===== */
 @keyframes shake{
   0%,100%{ transform:translate(2px,3px) rotate(0deg); }
@@ -401,64 +416,66 @@ body h3{ font-size:1.5rem; }
     }
 
     /* ===== Sketchpad layout ===== */
-  #whiteboard-section{
-    margin: 2rem auto;
-    max-width: 1200px;
-    text-align: center;
-    padding: 0 1rem;
-  }
+    /* ===== Sketchpad layout ===== */
+    #whiteboard-section{
+      margin: 2rem auto;
+      max-width: 1200px;
+      text-align: center;
+      padding: 0 1rem;
+    }
 
-  .sketchpad-title{
-    margin: 0 0 .5rem 0;
-    text-align: center;
-  }
+    .sketchpad-title{
+      margin: 0 0 .5rem 0;
+      text-align: center;
+    }
 
-  .sketchpad-description{
-    margin: 0 auto 1rem auto;
-    max-width: 60ch;
-    opacity: .9;
-    line-height: 1.5;
-  }
+    .sketchpad-description{
+      margin: 0 auto 1rem auto;
+      max-width: 60ch;
+      opacity: .9;
+      line-height: 1.5;
+    }
 
-  /* wrapper ensures the canvas centers and scales */
-  .sketchpad-wrap{
-    position: relative;
-    margin: 0 auto;
-    width: min(100%, 1100px);
-    background: #111;
-    border: 2px solid #444;
-  }
+    /* wrapper ensures the canvas centers and scales */
+    .sketchpad-wrap{
+      position: relative;
+      margin: 0 auto;
+      width: min(100%, 1100px);
+      background: #111;
+      border: 2px solid #444;
+    }
 
-  /* Canvas fills the wrapper; exact pixel size is set via JS for crispness */
-  #whiteboard{
-    display: block;
-    width: 100%;
-    height: auto;     /* height is controlled by JS using an aspect/viewport calc */
-    touch-action: none;
-    cursor: crosshair;
-  }
+    /* Canvas fills the wrapper; exact pixel size is set via JS for crispness */
+    #whiteboard{
+      display: block;
+      width: 100%;
+      height: auto;     /* height is controlled by JS using an aspect/viewport calc */
+      touch-action: none;
+      cursor: crosshair;
+    }
 
-  /* Buttons row */
-  .sketchpad-actions{
-    display: flex;
-    gap: .5rem;
-    justify-content: center;
-    align-items: center;
-    margin-top: .75rem;
-  }
+    /* Buttons row */
+    .sketchpad-actions{
+      display: flex;
+      gap: .5rem;
+      justify-content: center;
+      align-items: center;
+      margin-top: .75rem;
+    }
 
-  .btn{
-    padding: 0.5rem 1rem;
-    background: #444;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    font: inherit;
-    cursor: pointer;
-  }
-  .btn:hover{ background:#666; }
-  .btn-accent{ background:#555; }
-  .btn-accent:hover{ background:#777; }
+    .btn{
+      padding: 0.5rem 1rem;
+      background: #444;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font: inherit;
+      cursor: pointer;
+    }
+    .btn:hover{ background:#666; }
+    .btn-accent{ background:#555; }
+    .btn-accent:hover{ background:#777; }
+
 
     /* Section title alignment alternates left/right */
 section h2{
@@ -472,4 +489,14 @@ section:nth-of-type(even) h2 { text-align: right; }
 /* On small screens, keep headings left for readability */
 @media (max-width: 640px){
   section h2 { text-align: left !important; }
+}
+
+/* Center the title above the zoomed image */
+.modal-overlay-text{
+  left: 0;                 /* stretch to full width of the image wrapper */
+  right: 0;
+  transform: none;         /* remove previous translate centering */
+  display: flex;           /* center the inline text */
+  justify-content: center;
+  text-align: center;
 }
